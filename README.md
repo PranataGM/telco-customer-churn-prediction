@@ -128,6 +128,6 @@ Proyek ini mengikuti alur kerja standar dalam proyek Machine Learning:
 
 ## Kontributor
 
-* [Nama Lengkap Anda] ([Link Profil GitHub Anda](https://github.com/YourGitHubUsername)) - (Anda bisa menambahkan sedikit deskripsi peran Anda)
+* Pranata ([[Link Profil GitHub Anda](https://github.com/PranataGM)](https://github.com/YourGitHubUsername)) - (Anda bisa menambahkan sedikit deskripsi peran Anda)
 
 ---
