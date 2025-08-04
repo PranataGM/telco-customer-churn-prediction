@@ -132,9 +132,3 @@ Proyek ini mengikuti alur kerja standar dalam proyek Machine Learning:
 * **Google Colab**
 
 ---
-
-## Kontributor
-
-* Muhammad Aria Sastra ([Link Profil GitHub]([https://github.com/YourGitHubUsername](https://github.com/PranataGM)))
-
----
