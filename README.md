@@ -36,10 +36,10 @@ Proyek ini mengikuti alur kerja standar dalam proyek Machine Learning:
 * **One-Hot Encoding**: Menerapkan One-Hot Encoding pada kolom kategorikal nominal lainnya (misalnya `MultipleLines`, `InternetService`, `Contract`, `PaymentMethod`) untuk mengubahnya menjadi format numerik yang dapat diproses model.
 
 ### 3. Eksplorasi Data Lanjutan (Exploratory Data Analysis - EDA)
-* **Distribusi Target (`Churn`)**: Menganalisis proporsi pelanggan yang churn dan tidak churn. Ditemukan bahwa dataset memiliki **ketidakseimbangan kelas** (sekitar [Sebutkan Persentase Churn Anda]% pelanggan churn).
+* **Distribusi Target (`Churn`)**: Menganalisis proporsi pelanggan yang churn dan tidak churn. Ditemukan bahwa dataset memiliki **ketidakseimbangan kelas** (sekitar **26.58%** pelanggan churn).
 * **Analisis Korelasi**: Memvisualisasikan matriks korelasi untuk memahami hubungan antar fitur dan hubungan fitur dengan variabel target (`Churn`). Mengidentifikasi fitur-fitur yang paling berkorelasi positif/negatif dengan churn.
-    * **Fitur berkorelasi positif kuat dengan churn**: [Sebutkan 2-3 fitur utama dari analisis korelasi Anda, contoh: `MonthlyCharges`, `InternetService_Fiber optic`, `PaperlessBilling_Yes`].
-    * **Fitur berkorelasi negatif kuat dengan churn**: [Sebutkan 2-3 fitur utama dari analisis korelasi Anda, contoh: `tenure`, `Contract_Two year`, `OnlineSecurity_Yes`].
+    * **Fitur berkorelasi positif kuat dengan churn**: `MonthlyCharges`, `PaperlessBilling_Yes`, `InternetService_Fiber optic`.
+    * **Fitur berkorelasi negatif kuat dengan churn**: `tenure`, `Contract_Two year`, `OnlineSecurity_Yes`, `TechSupport_Yes`.
 
 ### 4. Pembagian Data & Penanganan Ketidakseimbangan Kelas
 * Membagi dataset menjadi fitur (`X`) dan target (`y`).
@@ -66,9 +66,9 @@ Proyek ini mengikuti alur kerja standar dalam proyek Machine Learning:
 * **Ringkasan Hasil Performa:**
     | Model                  | Accuracy | Precision | Recall   | F1-Score | ROC-AUC  |
     | :--------------------- | :------- | :-------- | :------- | :------- | :------- |
-    | Logistic Regression    | [Nilai Anda] | [Nilai Anda]  | **[Nilai Anda]** | [Nilai Anda] | **[Nilai Anda]** |
-    | Random Forest          | **[Nilai Anda]** | **[Nilai Anda]** | [Nilai Anda] | [Nilai Anda] | [Nilai Anda] |
-    | XGBoost                | [Nilai Anda] | [Nilai Anda]  | [Nilai Anda] | [Nilai Anda] | [Nilai Anda] |
+    | Logistic Regression    | 0.7612   | 0.5409    | **0.6711** | 0.5990   | **0.8230** |
+    | Random Forest          | **0.7775** | **0.5784** | 0.6016   | 0.5898   | 0.8120 |
+    | XGBoost                | 0.7633   | 0.5514    | 0.5882   | 0.5692   | 0.8099 |
 
 * **Kesimpulan Evaluasi**:
     Berdasarkan hasil, **Logistic Regression** dipilih sebagai model terbaik untuk proyek ini. Meskipun Random Forest memiliki akurasi dan presisi sedikit lebih tinggi, Logistic Regression menunjukkan **Recall dan ROC-AUC yang jauh lebih unggul**. Dalam konteks prediksi churn, Recall tinggi sangat krusial karena kita ingin mengidentifikasi sebanyak mungkin pelanggan yang akan churn untuk intervensi proaktif, bahkan jika itu berarti menerima beberapa *false positives*. ROC-AUC yang tinggi juga menunjukkan kemampuan model yang baik dalam membedakan antara pelanggan yang churn dan tidak churn.
@@ -77,20 +77,27 @@ Proyek ini mengikuti alur kerja standar dalam proyek Machine Learning:
 * Menganalisis koefisien dari model Logistic Regression untuk mengidentifikasi fitur-fitur yang paling memengaruhi kemungkinan churn.
 
 * **Fitur Paling Berpengaruh (Dampak Negatif - Mengurangi Churn):**
-    * `PhoneService`
+    * `PhoneService` (koefisien sangat negatif: pelanggan tanpa PhoneService mungkin lebih cenderung churn)
     * `InternetService_Fiber optic`
     * `Contract_Two year`
     * `OnlineSecurity_Yes`
     * `TechSupport_Yes`
-    * [Sebutkan fitur relevan lainnya dari output Anda]
-
-* **Fitur Paling Berpengaruh (Dampak Positif - Meningkatkan Churn):**
-    * [Contoh: Meskipun koefisiennya negatif, jika dibandingkan dengan kategori dasar One-Hot Encoding, bisa jadi fitur ini secara implisit meningkatkan churn. Dari output Anda, `PaymentMethod_Electronic check` adalah satu-satunya dengan koefisien negatif paling kecil/mendekati nol, yang bisa diartikan relatif "kurang mengurangi churn" dibanding metode lain, atau bahkan meningkatkan dibandingkan base. Perhatikan ini baik-baik.]
+    * `OnlineBackup_Yes`
+    * `Contract_One year`
+    * `StreamingMovies_Yes`
+    * `StreamingTV_Yes`
+    * `PaymentMethod_Credit card (automatic)`
+    * `PaymentMethod_Mailed check`
+    * `DeviceProtection_Yes`
+    * `MultipleLines_Yes`
+    * `Dependents`
 
 * **Wawasan Bisnis Utama**:
-    * Pelanggan dengan **kontrak jangka panjang (satu atau dua tahun)** cenderung sangat loyal.
-    * Layanan tambahan seperti **keamanan online, dukungan teknis, backup online, dan perlindungan perangkat** secara signifikan mengurangi kemungkinan churn.
-    * [Tambahkan wawasan lain berdasarkan interpretasi fitur Anda, misalnya tentang metode pembayaran, atau layanan internet].
+    * Pelanggan dengan **kontrak jangka panjang (satu atau dua tahun)** cenderung sangat loyal dan memiliki risiko churn yang rendah. Perusahaan harus mendorong perpanjangan kontrak.
+    * Layanan tambahan seperti **keamanan online, dukungan teknis, backup online, dan perlindungan perangkat** secara signifikan mengurangi kemungkinan churn. Mempromosikan dan memastikan kualitas layanan-layanan ini sangat penting.
+    * Pelanggan yang menggunakan **layanan hiburan (StreamingTV/Movies)** juga menunjukkan tingkat churn yang lebih rendah.
+    * **Kualitas layanan telepon dan internet (terutama fiber optik)** sangat memengaruhi retensi.
+    * **Metode pembayaran** juga memainkan peran.
 
 ---
 
@@ -98,8 +105,8 @@ Proyek ini mengikuti alur kerja standar dalam proyek Machine Learning:
 
 1.  **Clone repositori ini:**
     ```bash
-    git clone [https://github.com/YourGitHubUsername/customer-churn-prediction.git](https://github.com/YourGitHubUsername/customer-churn-prediction.git)
-    cd customer-churn-prediction
+    git clone [https://github.com/YourGitHubUsername/telco-customer-churn-prediction.git](https://github.com/YourGitHubUsername/telco-customer-churn-prediction.git)
+    cd telco-customer-churn-prediction
     ```
 2.  **Unduh Dataset:**
     Unduh file `WA_Fn-UseC_-Telco-Customer-Churn.csv` dari [Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn).
@@ -128,6 +135,6 @@ Proyek ini mengikuti alur kerja standar dalam proyek Machine Learning:
 
 ## Kontributor
 
-* Pranata ([Link Profil GitHub Anda]([https://github.com/PranataGM](https://github.com/PranataGM))](https://github.com/YourGitHubUsername))
+* Muhammad Aria Sastra ([Link Profil GitHub]([https://github.com/YourGitHubUsername](https://github.com/PranataGM)))
 
 ---
